@@ -1,0 +1,13 @@
+# Ignore Google credentials and token files
+credentials.json
+token.json
+
+# Ignore virtual environment (recommended)
+.venv/
+
+# Ignore any other potentially sensitive files
+*.key
+secrets/
+
+# example to ignore all files in the output folder, if you have one.
+output/
