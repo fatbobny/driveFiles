@@ -1,6 +1,9 @@
 # Ignore Google credentials and token files
-credentials.json
-token.json
+config/credentials.json
+config/token.json
+config/google_credentials.json
+config/google_token.json
+config/pushover_config.json
 
 # Ignore virtual environment (recommended)
 .venv/
@@ -9,5 +12,26 @@ token.json
 *.key
 secrets/
 
+
 # example to ignore all files in the output folder, if you have one.
 output/
+
+# Large binary/data files
+*.pkl
+*.sav
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Claude Code internals
+.claude/
