@@ -3,7 +3,7 @@ import logging
 from typing import Dict, Any, List, Optional
 import re
 import dateparser
-from basicfunctions import add_months
+from basicfunctions import add_months, extract_json_content as get_json
 import pushover_seb
 
 # These are type hints for clarity. You would import the actual classes
@@ -14,6 +14,10 @@ import pushover_seb
 GoogleDriveFileManager = Any
 TfidfVectorizer = Any
 LogisticRegression = Any
+
+_app_config = get_json('config/config_app.json')
+_DATE_STRING_FIXES: dict = _app_config.get('date_string_fixes', {}) if _app_config else {}
+_DOWNLOAD_BASE_PATH: str = _app_config.get('download_base_path', 'Downloads/A_To sort/') if _app_config else 'Downloads/A_To sort/'
 
 
 class DriveFile:
@@ -180,7 +184,7 @@ class DriveFile:
             prediction = self._ml_model.predict(content_vectorized)
             target_path = str(prediction[0])
             logging.info(f"ML model predicted target path '{target_path}' for file '{self.name}'.")
-            return "Downloads/A_To sort/" + target_path
+            return _DOWNLOAD_BASE_PATH + target_path
         except Exception as e:
             logging.error(f"Error during ML prediction for '{self.name}': {e}")
             return None
@@ -208,9 +212,9 @@ class DriveFile:
                     for k in range(len(mo)):
                         # extract the matches into a string
                         de = mo[k]
-                        date_extract = de.replace('ler','1er') #issue with Bred
-                        date_extract = de.replace('aodt', 'aout') #issue with releves BNPP
-                        date_extract = de.replace('aott', 'aout')  # issue with releves BNPP
+                        date_extract = de
+                        for bad, good in _DATE_STRING_FIXES.items():
+                            date_extract = date_extract.replace(bad, good)
                         try:
                             #                         date = datetime.datetime.strptime(date_extract, self.config['regex_date'][i]['extract_format'])
                             if 'extract_format' in self.config['regex_date'][i].keys():
@@ -221,8 +225,8 @@ class DriveFile:
                                 # logging.info('Used the extract format for the date parsing.')
                             else:
                                 date = dateparser.parse(date_extract, languages=['en', 'fr'])
-                        except:
-                            pass
+                        except Exception as e:
+                            logging.error(f"Date parsing failed for '{date_extract}': {e}")
                         if date is not None:
                             break
 
@@ -321,6 +325,9 @@ class DriveFile:
 
         # 4. Check if the file needs to be moved
         #    This avoids an unnecessary API call if the file is already in the correct folder.
+        if not target_folder_id:
+            logging.error(f"target_folder_id is None for '{self.name}'. Skipping move.")
+            return
         needs_move = self._parent_folder_id != target_folder_id
 
         if needs_move:

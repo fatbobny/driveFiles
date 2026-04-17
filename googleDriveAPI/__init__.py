@@ -5,6 +5,7 @@ import io
 import random
 from types import NoneType
 import basicfunctions
+from basicfunctions import extract_json_content as get_json
 import datetime
 import tempfile
 import fitz  # pip install pymupdf
@@ -55,6 +56,11 @@ class GoogleDriveFileManager:
         self.drive_service = build("drive", "v3", credentials=creds)
         self.activity_service = build("driveactivity", "v2", credentials=creds)
 
+        self._folder_path_cache: dict = {}
+        _app_config = get_json('config/config_app.json')
+        self._ocr_dpi: int = _app_config.get('ocr_dpi', 250) if _app_config else 250
+        self._max_pages_for_ocr: int = _app_config.get('max_pages_for_ocr', 4) if _app_config else 4
+
     def find_folder_id_by_name(self, folder_name, parent_folder_id=None):
         """Finds the ID of a folder by its name."""
         try:
@@ -77,7 +83,7 @@ class GoogleDriveFileManager:
             return items[0]["id"]
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def find_folder_id_by_path(self, folder_path):
@@ -100,7 +106,7 @@ class GoogleDriveFileManager:
             return file.get('name')
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def get_parent_folder_id(self, file_or_folder_id):
@@ -115,7 +121,7 @@ class GoogleDriveFileManager:
                 return parents[0]
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def get_folder_details(self, folder_name=None, folder_id=None, parent_folder_id=None):
@@ -137,6 +143,8 @@ class GoogleDriveFileManager:
 
     def get_path_from_id(self, file_or_folder_id):
         """Gets the full path of a file or folder from its ID."""
+        if file_or_folder_id in self._folder_path_cache:
+            return self._folder_path_cache[file_or_folder_id]
         try:
             current_id = file_or_folder_id
             path_parts = []
@@ -154,10 +162,12 @@ class GoogleDriveFileManager:
 
                 current_id = parent_id
 
-            return "/".join(path_parts)
+            result = "/".join(path_parts)
+            self._folder_path_cache[file_or_folder_id] = result
+            return result
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def list_files_in_folder(self, folder_id=None, file_name=None):
@@ -188,7 +198,7 @@ class GoogleDriveFileManager:
             return all_items
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return []
 
     def create_folder(self, folder_name, parent_folder_id=None):
@@ -207,7 +217,7 @@ class GoogleDriveFileManager:
             return file.get('id')
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def create_folder_by_path(self, folder_path):
@@ -249,7 +259,7 @@ class GoogleDriveFileManager:
                 return file_content
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
         except IOError as e:
             logging.info(f"IO Error during download: {e}")
@@ -270,7 +280,7 @@ class GoogleDriveFileManager:
             return file
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def rename_file(self, file_id, new_name):
@@ -297,7 +307,7 @@ class GoogleDriveFileManager:
             logging.info(f"File with id '{file_id}' named {file_name} deleted successfully.")
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
 
     def upload_file(self, local_filepath, folder_id=None, drive_filename=None):
         """Uploads a file..."""
@@ -315,7 +325,7 @@ class GoogleDriveFileManager:
             return file.get('id')
 
         except HttpError as error:
-            logging.ERROR(f"An error occurred: {error}")
+            logging.error(f"An error occurred: {error}")
             return None
 
     def get_file_content(self, file_id, mime_type, file_name):
@@ -353,9 +363,11 @@ class GoogleDriveFileManager:
             logging.error(f"An error occurred: {e}")
             return None
 
-    def extract_text_from_pdf(self, file_content, max_pages_for_ocr=4):
+    def extract_text_from_pdf(self, file_content, max_pages_for_ocr=None):
         """Extracts text from a PDF using the pdf2image and tesseract library."""
-        DPI_for_OCR = 250
+        if max_pages_for_ocr is None:
+            max_pages_for_ocr = self._max_pages_for_ocr
+        DPI_for_OCR = self._ocr_dpi
         try:
             with tempfile.NamedTemporaryFile(delete=True, suffix=".pdf") as temp_pdf:
                 temp_pdf.write(file_content)
@@ -471,49 +483,12 @@ class GoogleDriveFileManager:
 
     def get_files_and_extract_content_from_folders(self, folder_ids, filter_mime_types=None, max_pages_for_ocr=5):
         """Retrieves files from a list of folder IDs, filters them by MIME type, and extracts text content."""
-        if filter_mime_types is None:
-            filter_mime_types = ['application/pdf', 'image/']
-
-        all_files_data = []
-
-        for folder_id in folder_ids:
-            try:
-                folder_name = self.get_file_or_folder_name(folder_id)
-                logging.info(f"--- Extracting files data in folder '{folder_name}' (ID: {folder_id}) ---")
-                print(f"--- Extracting files data in folder '{folder_name}' ---")
-            except Exception as e:
-                logging.error(f"Could not get folder name for ID {folder_id}: {e}")
-                continue
-
-            files_in_folder = self.list_files_in_folder(folder_id=folder_id)
-
-            for file_summary in files_in_folder:
-                file_id = file_summary['id']
-                file_name = file_summary['name']
-                mime_type = file_summary['mimeType']
-
-                if any(filter_type in mime_type for filter_type in filter_mime_types):
-                    file_details = self.get_file_details_and_extract_content(
-                        file_id=file_id,
-                        max_pages_for_ocr=max_pages_for_ocr
-                    )
-                    all_files_data.append(file_details)
-                else:
-                    logging.info(
-                        f"Skipping file: {file_name} (ID: {file_id}, Type: {mime_type}) as it's not in the filtered types.")
-
-            logging.info(f'+++ Obtained all files for {folder_name} +++')
-            print(f'+++ Obtained all files for {folder_name} +++')
-
-        logging.info('+++ Finished obtaining files for monitored folders +++')
-        print('+++ Finished obtaining files for monitored folders +++')
-        logging.info(f'*** Number of files processed: {len(all_files_data)} ***')
-        print(f'*** Number of files processed: {len(all_files_data)} ***')
-        for file_data in all_files_data:
-            logging.info(f'* File name : {file_data.get("file_name", "N/A")}')
-            print(f'* File name : {file_data.get("file_name", "N/A")}')
-
-        return all_files_data
+        return self.fetch_and_process_files_in_folders(
+            folder_ids=folder_ids,
+            on_file_callback=None,
+            filter_mime_types=filter_mime_types,
+            max_pages_for_ocr=max_pages_for_ocr,
+        )
 
     def fetch_and_process_files_in_folders(self, folder_ids, on_file_callback=None, filter_mime_types=None, max_pages_for_ocr=5):
         """Fetches all files from a list of folder IDs and processes them using a callback."""

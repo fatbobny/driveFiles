@@ -1,0 +1,10 @@
+{
+  "ocr_dpi": 250,
+  "max_pages_for_ocr": 4,
+  "download_base_path": "Downloads/A_To sort/",
+  "date_string_fixes": {
+    "ler": "1er",
+    "aodt": "aout",
+    "aott": "aout"
+  }
+}
