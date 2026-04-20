@@ -1,0 +1,1720 @@
+{
+  "Citi - payslip US": {
+    "keywords": [
+      "Citigroup Global Markets Inc",
+      "1010904229",
+      "check"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{2}\\/\\d{2}\\/\\d{4} - (\\d{2}\\/\\d{2}\\/\\d{4})"
+      },
+      {
+        "regex_string": "\\d{2}\\/\\d{2}\\/\\d{4} (\\d{2}\\/\\d{2}\\/\\d{4}) \\d{2}\\/\\d{2}\\/\\d{4}"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi - payslip US",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Professional/Citi/Payslip",
+    "target_folder_add_year": true
+  },
+  "NY Utilities - 159E Cean": {
+    "keywords": [
+      "conEdison",
+      "48712-19646-7",
+      "Your bill breakdown",
+      "Cean"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Your billing summary as of (\\w{3} \\d{2}, \\d{4})",
+        "extract_format": "%M %d, %y"
+      }
+    ],
+    "filename_base": "Con Edison - 159E Cean",
+    "filename_datetype": "month",
+    "target_folder": "/Documents/Admin/Con Edison",
+    "target_folder_add_year": false
+  },
+  "NY Utilities - 159E 1F": {
+    "keywords": [
+      "conEdison",
+      "42-5035-0280-0003-5",
+      "Your bill breakdown"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Your billing summary as of (\\w{3} \\d{2}, \\d{4})",
+        "extract_format": "%M %d, %y"
+      }
+    ],
+    "filename_base": "Con Edison - 159E 1F",
+    "filename_datetype": "month",
+    "target_folder": "/Documents/Admin/Con Edison",
+    "target_folder_add_year": false
+  },
+  "Bank - AMEX - France": {
+    "keywords": [
+      "Carte Air France KLM",
+      "American Express",
+      "Relevé de compte"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "au (\\d{2} \\w* \\d{4})",
+        "extract_format": "%d %B %y"
+      }
+    ],
+    "filename_base": "Amex FR - Releve",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/AMEX FR",
+    "target_folder_add_year": true
+  },
+  "Bank - AMEX - USA": {
+    "keywords": [
+      "Platinum Card",
+      "Closing Date",
+      "Payment Due Date"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Closing Date (\\d{2}\\/\\d{2}\\/\\d{2})"
+      }
+    ],
+    "filename_base": "Amex USA - Statement",
+    "filename_datetype": "day",
+    "target_folder": "/Documents/Finances/Banking - statements/AMEX USA",
+    "target_folder_add_year": true
+  },
+  "Bank - Chase - Freedom Rise": {
+    "keywords": [
+      "FREEDOM RISE",
+      "ACCOUNT SUMMARY",
+      "Late Payment Warning"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Opening/Closing.Date.\\d{2}/\\d{2}/\\d{2} - (\\d{2}/\\d{2}/\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Chase - Freedom Rise",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Chase",
+    "target_folder_add_year": true
+  },
+  "Bank - Chase - Freedom Unlimited": {
+    "keywords": [
+      "FREEDOM UNLIMITED",
+      "ACCOU",
+      "MARY",
+      "Late Payment Warning"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Opening/Closing.Date.\\d{2}/\\d{2}/\\d{2} - (\\d{2}/\\d{2}/\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Chase - Freedom Unlimited",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Chase",
+    "target_folder_add_year": true
+  },
+  "Bank - Chase - Checking": {
+    "keywords": [
+      "ECKING SUMMARY",
+      "Chase",
+      "000000527195260"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "through (\\w* \\d{2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Chase - Checking",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Chase",
+    "target_folder_add_year": true
+  },
+  "Bank - Chase - Savings": {
+    "keywords": [
+      "SAVINGS SUMMARY",
+      "Chase",
+      "000003995999175"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "through (\\w* \\d{2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Chase - Savings",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Chase",
+    "target_folder_add_year": true
+  },
+  "Bank - Chase - Investments": {
+    "keywords": [
+      "Investment Statement",
+      "Morgan",
+      "758-20469"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\w* \\d{2} - (\\w* \\d{2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "JPM Investments",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Chase",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SCI Chalou": {
+    "keywords": [
+      "FR76 3000 4026 8800 0100 1635 472",
+      "Chalou",
+      "Relev"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "PERIODE DU \\d{2} \\w* \\d{4} .* (\\d{2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "SCI Chalou",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SCI Chalou",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SCI Chalou - Frais": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4026 8800 0100 1635 472",
+      "SCI Chalou",
+      "Facture",
+      "Forfait"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du \\d{1,2}.\\d{1,2}.\\d{4} au (\\d{1,2}.\\d{1,2}.\\d{4})",
+        "extract_format": "%d.%m.%Y"
+      },
+      {
+        "regex_string": "Le (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "SCI Chalou - Facture",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SCI Chalou",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SCI Mailleux Tiano": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4005 6700 0101 5449 629",
+      "Mailleux Tiano"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "PERIODE DU \\d{1,2} \\w* \\d{4} AU (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "SCI Mailleux Tiano",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SCI Mailleux Tiano",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SARL Tiano Mailleux": {
+    "keywords": [
+      "PARIBAS",
+      "FR76 3000 4008 0200 0102 0995 765",
+      "Tiano Mailleux"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "PERIODE DU \\d{1,2} \\w* \\d{4} AU (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "SARL Tiano Mailleux",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SARL Tiano Mailleux",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SCPIs": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0016 9113 025",
+      "de votre compte",
+      "Relevé édité"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du|au (\\d{1,2} \\D* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux - Compte personnel - SCPIs",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SCPIs",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - SCPIs - releves de frais": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0016 9113 025",
+      "Relevé de frais"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": -4,
+    "filename_base": "S. Mailleux - Compte personnel - SCPIs",
+    "filename_datetype": "year",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/SCPIs",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP Societes - LMNP": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0021 9533 625"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux & M. Tiano - Compte commun - LMNP",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Societes/LMNP",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - PEL Prune": {
+    "keywords": [
+      "BNP PARIBAS",
+      "RELEVE DE PLAN D'EPARGNE LOGEMENT",
+      "PRUNE MAILLEUX"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{1,2} \\w* \\d{4} au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "P. Mailleux - PEL",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Compte epargne": {
+    "keywords": [
+      "BNP PARIBAS",
+      "RELEVE DE VOS COMPTES EPARGNE",
+      "30004 02330 00030838757 25"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux - Compte epargne",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Courant": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0018 0297 125",
+      "RELEVE DE COMPTE CHEQUES"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux & M. Tiano - Compte commun - Courant",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Courant Frais": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0018 0297 125",
+      "Relevé de frais"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": -4,
+    "filename_base": "S. Mailleux & M. Tiano - Compte commun - Courant - Frais",
+    "filename_datetype": "year",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Manon courant": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4026 8800 0018 1762 372",
+      "RELEVE DE COMPTE CHEQUES"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "M. Tiano - Compte perso - Courant",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Manon Epargne": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4026 8800 0323 1161 072",
+      "RELEVE DE COMPTE D'EPARGNE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "M. Tiano - Compte epargne",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Courcelles": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0021 9465 725"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux - Compte personnel - Courcelles",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Etables": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0021 9523 925"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux & M. Tiano - Compte commun - Etables",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Eygalieres": {
+    "keywords": [
+      "BNP PARIBAS",
+      "FR76 3000 4023 3000 0021 9543 325"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "S. Mailleux & M. Tiano - Compte commun - Eygalieres",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - PEL Lou": {
+    "keywords": [
+      "BNP PARIBAS",
+      "RELEVE DE PLAN D'EPARGNE LOGEMENT",
+      "LOU MAILLEUX"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{1,2} \\w* \\d{4} au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "L. Mailleux - PEL",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - PEL Sacha": {
+    "keywords": [
+      "BNP PARIBAS",
+      "RELEVE DE PLAN D'EPARGNE LOGEMENT",
+      "SACHA MAILLEUX"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{1,2} \\w* \\d{4} au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Sacha Mailleux - PEL",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Livret A Lou": {
+    "keywords": [
+      "BNP PARIBAS",
+      "R76 3000 4023 3000 0309 6505 125",
+      "RELEVE DE LIVRET A"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du.*au (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "L. Mailleux - Livret A",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Assurances vie - releve d'assurance": {
+    "keywords": [
+      "BNP PARIBAS",
+      "relevé d'assurance"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "arrété au (\\d{1,2}.\\d{1,2}.\\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Assurances vie - Releve",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/BNP France - Personal accounts",
+    "target_folder_add_year": true
+  },
+  "France - Urssaf - Charges": {
+    "keywords": [
+      "Urssaf",
+      "AVIS DE PRELEVEMENT AUTOMATIQUE DES COTISATIONS SOCIALES"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Prélevé le (\\d{1,2}\\/\\d{1,2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "Cotisations URSSAF",
+    "filename_datetype": "day",
+    "month_shift": 0,
+    "target_folder": "/Documents/Finances/Taxes - France",
+    "target_folder_add_year": true
+  },
+  "France - Wine Sitting": {
+    "keywords": [
+      "WINESITTING",
+      "FACTURE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date de la facture (\\d{2} \\w*\\. \\d{4})"
+      },
+      {
+        "regex_string": "Date de la facture (\\d{2} \\w*\\ \\d{4})"
+      },
+      {
+        "regex_string": "(\\d{2} \\D*\\. \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "WineSitting",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles/Vin/Factures Wine Sitting",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie SARL - Jardin": {
+    "keywords": [
+      "PROVENCE JARDIN",
+      "entretien",
+      "SARL Tiano Mailleux"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "DATE.*(\\d{2}\\.\\d{2}\\.\\d{4})",
+        "extract_format": "%d.%m.%Y"
+      },
+      {
+        "regex_string": "Le, (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "au (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Provence Jardin",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Jardin",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie SARL - Pressing": {
+    "keywords": [
+      "SASU CG CLEAN",
+      "échéances"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "FA.*(\\d{2}\\/\\d{2}\\/\\d{4}) "
+      }
+    ],
+    "filename_base": "La Bergerie - Pressing",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Pressing",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie - Eau": {
+    "keywords": [
+      "REGIE EAU ET ASSAINISSEMENT",
+      "024004530011"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture .* du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "La Bergerie - Eau",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie/Eau",
+    "target_folder_add_year": false
+  },
+  "Eygalieres - Palmyre - Eau": {
+    "keywords": [
+      "REGIE EAU ET ASSAINISSEMENT",
+      "024004530010"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture .* du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Eygalieres - Eau",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SCI Mailleux Tiano/1. Proprietes/Eygalieres - Mas Palmyre/1. Revenus & Depenses - Eygalieres #impots/Eau",
+    "target_folder_add_year": false
+  },
+  "Domus Gestion - Chalgrin": {
+    "keywords": [
+      "DOMUS GESTION",
+      "Chalgrin",
+      "RELEVE DE COMPTE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "DU \\d{2}/\\d{2}/\\d{4} AU (\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Compte rendu de gestion - Chalgrin",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/LMNP/Chalgrin/1. Revenus & Depenses - Chalgrin/Loyers",
+    "target_folder_add_year": true
+  },
+  "Domus Gestion - Brea": {
+    "keywords": [
+      "DOMUS GESTION",
+      "Bréa",
+      "RELEVE DE COMPTE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "DU \\d{2}/\\d{2}/\\d{4} AU (\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Compte rendu de gestion - Brea",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/LMNP/Brea/1. Revenus & Depenses - Brea/Loyers",
+    "target_folder_add_year": true
+  },
+  "Courcelles - ASA - Appel de fonds 0005 & 0021": {
+    "keywords": [
+      "ASA GESTION IMMOBILIERE",
+      "Courcelles",
+      "APPEL PROVISIONS",
+      "TRIM",
+      "0005 ",
+      "0021"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Courcelles - Appel sur budget 0005 & 0021- Recap",
+    "filename_datetype": "quarter",
+    "month_shift": 1,
+    "target_folder":"Documents/Finances/SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles/Copropriete - Charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "Courcelles - ASA - Appel de fonds 0022": {
+    "keywords": [
+      "ASA GESTION IMMOBILIERE",
+      "Courcelles",
+      "APPEL PROVISIONS",
+      "TRIM",
+      "0022"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Courcelles - Appel sur budget 0022- Recap",
+    "filename_datetype": "quarter",
+    "month_shift": 1,
+    "target_folder": "Documents/Finances/SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles/Copropriete - Charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "Manon - Marie Chambon": {
+    "keywords": [
+      "Chambon",
+      "Suivi de chantier"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Mois (?:de |d[’'])\\s*(\\w+ \\d{4})"
+      },
+      {
+        "regex_string": "(\\d{2}[\\/\\.]\\d{2}[\\/\\.]\\d{4})"
+      }
+    ],
+    "filename_base": "Marie Chambon",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Professional/Manon - Interior design/Accounting/Marie Chambon",
+    "target_folder_add_year": true
+  },
+  "EDF - La Bergerie SARL": {
+    "keywords": [
+      "TIANO MAILLEUX",
+      "2020006859575",
+      "Facture"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture.*du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - La Bergerie - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Etables - Echeancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 014 584 425"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Etables - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SCI Mailleux Tiano/1. Proprietes/Etables sur Mer/1. Revenus & Depenses - SCI - Etables/EDF'",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi HK - Accounts": {
+    "keywords": [
+      "Citibank",
+      "CITIGOLD",
+      "HKD"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement Period \\(M\\/D\\/Y\\) \\d{2}\\/\\d{2}\\/\\d{2} - (\\d{2}\\/\\d{2}\\/\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi - Accounts",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Citi HK",
+    "target_folder_add_year": true
+  },
+  "Bank - HSBC - One": {
+    "keywords": [
+      "HSBC",
+      "One Account Statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "HSBC HK - Compte joint",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/HSBC HK",
+    "target_folder_add_year": true
+  },
+  "Brea - Saulais - Appel de fonds": {
+    "keywords": [
+      "5 RUE BREA",
+      "Cabinet Fabrice SAULAIS",
+      "APPEL DE FONDS"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "DATE D'EXIGIBILITE (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Brea - Appel sur budget",
+    "filename_datetype": "quarter",
+    "target_folder": "Documents/Finances/LMNP/Brea/1. Revenus & Depenses - Brea/Copropriete - Charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "EDF - Brea - Facture": {
+    "keywords": [
+      "EDF",
+      "Le montant total TTC de votre facture correspond",
+      "N° de compte : 4 02 4 043 769 585"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Brea - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/LMNP/Brea/1. Revenus & Depenses - Direct - Brea #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Brea - Echeancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 043 769 585"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Brea - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/LMNP/Brea/1. Revenus & Depenses - Direct - Brea #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "Chalgrin - Malville - Appel de fonds": {
+    "keywords": [
+      "Chalgrin",
+      "mavimmo.fr",
+      "Charges courantes"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "month_shift": 1,
+    "filename_base": "Chalgrin - Appel sur budget",
+    "filename_datetype": "quarter",
+    "target_folder": "Documents/Finances/LMNP/Chalgrin/1. Revenus & Depenses - Chalgrin/Copropriete - charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "Efimmo - Dividende": {
+    "keywords": [
+      "Efimmo",
+      "acompte",
+      "trimestre"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{1,2}.*\\w* \\d{4})",
+        "extract_format": "%d %b %Y"
+      },
+      {
+        "regex_string": "(\\d{1,2}/\\d{1,2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Efimmo - Acompte dividende",
+    "filename_datetype": "quarter",
+    "month_shift": -1,
+    "target_folder": "Documents/Finances/SCPIs/1. Revenus & Depenses - Direct - SCPIs #impots/Dividendes SCPIs/1. Details paiement",
+    "target_folder_add_year": true
+  },
+  "Immorente - Dividende": {
+    "keywords": [
+      "Immorente",
+      "acompte",
+      "trimestre"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{1,2} \\w* \\d{4})",
+        "extract_format": "%d %b %Y"
+      },
+      {
+        "regex_string": "(\\d{1,2}/\\d{1,2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Immorente - Acompte dividende",
+    "filename_datetype": "quarter",
+    "month_shift": -1,
+    "target_folder": "Documents/Finances/SCPIs/1. Revenus & Depenses - Direct - SCPIs #impots/Dividendes SCPIs/1. Details paiement",
+    "target_folder_add_year": true
+  },
+  "PFO2 - Dividende": {
+    "keywords": [
+      "PFO2",
+      "acompte",
+      "trim"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\d{1,2}/\\d{1,2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "PFO2 - Acompte dividende",
+    "filename_datetype": "quarter",
+    "month_shift": -1,
+    "target_folder": "Documents/Finances/SCPIs/1. Revenus & Depenses - Direct - SCPIs #impots/Dividendes SCPIs/1. Details paiement",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie - IONOS": {
+    "keywords": [
+      "IONOS",
+      "Facture"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du: (\\d{2}\\/\\d{2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "La Bergerie - IONOS",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Site Internet",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie - Stripe": {
+    "keywords": [
+      "Stripe",
+      "Tax Invoice"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\w* \\d*, \\d{4})"
+      }
+    ],
+    "filename_base": "La Bergerie - Stripe",
+    "filename_datetype": "month",
+    "month_shift": -1,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Stripe",
+    "target_folder_add_year": true
+  },
+  "Etables - Baie d'Armor Eaux": {
+    "keywords": [
+      "ARMOR",
+      "EAUX",
+      "Facture",
+      "Avis",
+      "automatique"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "au (\\d{1,2} \\w* \\d{4})",
+        "extract_format": "%d %b %Y"
+      },
+      {
+        "regex_string": "du *(\\d{1,2} .* \\d{4})"
+      }
+    ],
+    "filename_base": "Etables - Veolia - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/Etables - Eau",
+    "target_folder_add_year": true
+  },
+
+
+
+
+
+
+
+  "Bank - BNP - Assurances vie - CR de gestion": {
+    "keywords": [
+      "BNP PARIBAS",
+      "Gestion Privilége",
+      "compte rendu de gestion"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{1,2}.\\d{1,2}.\\d{4} au (\\d{1,2}.\\d{1,2}.\\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Assurances vie - CR de gestion",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/BNP France",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Assurances vie - CR de gestion v2": {
+    "keywords": [
+      "PARIBAS",
+      "compte-rendu de gestion",
+      "convention patrimoniale"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\d{2}\\.\\d{2}\\.\\d{4} au (\\d{2}\\.\\d{2}\\.\\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Assurances vie - CR de gestion",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/BNP France",
+    "target_folder_add_year": true
+  },
+
+  "Bank - BNP - Assurances vie - arbitrage": {
+    "keywords": [
+      "BNP PARIBAS",
+      "assurance vie",
+      "nous avons effectué un arbitrage"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Le (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Assurances vie - Arbitrage",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/BNP France",
+    "target_folder_add_year": true
+  },
+  "Bank - BNP - Assurances vie - Information annuelle": {
+    "keywords": [
+      "BNP PARIBAS",
+      "assurance vie",
+      "Information annuelle"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Le (\\d{1,2} \\w* \\d{4})"
+      }
+    ],
+    "month_shift": -4,
+    "filename_base": "Assurances Vie/Assurances vie - Information annuelle",
+    "filename_datetype": "year",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/BNP France - Releves bancaires #impots",
+    "target_folder_add_year": true
+  },
+  "Bank - HSBC - VISA": {
+    "keywords": [
+      "HSBC",
+      "STATEMENT OF CREDIT CARD ACCOUNT"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement date.*\\n*.*(\\d{2} \\w{3} \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "HSBC HK - Visa",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/HSBC HK",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi HK - Cards": {
+    "keywords": [
+      "Citibank",
+      "Citi Credit Cards and/or Ready Credit"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi - Cards",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi HK",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Manon LLC": {
+    "keywords": [
+      "Statement period",
+      "Relationship Summary",
+      "MANON TIANO LLC",
+      "6879893838"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "( \\w{3} \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": -1,
+    "filename_base": "Citi US - Manon Tiano LLC",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Joint account": {
+    "keywords": [
+      "CITIGOLD SERVICES",
+      "Your Citigold simplified banking Account Statement",
+      "6876619884"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\w* \\d{1,2} - (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Joint account",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Personal account": {
+    "keywords": [
+      "Global Executive Banking",
+      "Statement period",
+      "Relationship Summary",
+      "6878823280"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "( \\w{3} \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": -1,
+    "filename_base": "Citi US - Personal account",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Credit card": {
+    "keywords": [
+      "AADVANTAGE",
+      "Citi",
+      "STATEMENT"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Billing Period.*(\\d{1,2}\\/\\d{1,2}\\/\\d{1,2})"
+      }
+    ],
+    "month_shift": -1,
+    "filename_base": "Citi US - Credit card AA",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Investment": {
+    "keywords": [
+      "citi Investment",
+      "State",
+      "C63-045121"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "- (\\w* \\d{2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Investments",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Schwab - 527 - Trade confirmation": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "3368-7527",
+      "cusip"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Trade: (\\d{2}\\/\\d{2}\\/\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 527 - Trade confirmation",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Trade confirmations",
+    "target_folder_add_year": true
+  },
+  "Schwab - 527 - Statement": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "3368-7527",
+      "Account Value Summary",
+      "statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 527 - Statement",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
+    "target_folder_add_year": true
+  },
+  "Schwab - 221 - Statement": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "6034-4221",
+      "Account Value Summary",
+      "statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 221 - Statement",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
+    "target_folder_add_year": true
+  },
+  "Schwab - Futures": {
+    "keywords": [
+      "Schwab",
+      "Monthly Futures Statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "This Month's Activity.*(\\d{4}-\\d{2}-\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - Futures",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - Couleurs Piscines - Facture": {
+    "keywords": [
+      "Couleurs Piscines",
+      "Piscine"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date.*(\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Mas Palmyre - Piscine",
+    "filename_datetype": "month",
+    "month_shift": -1,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Piscine",
+    "target_folder_add_year": false
+  },
+  "Computer Shares - DRS Advice": {
+    "keywords": [
+      "Computershare",
+      "Citigroup Inc",
+      "Direct Registration (DRS) Advice"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date: (\\d{2} \\w{3} \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "DRS Advice",
+    "filename_datetype": "day",
+    "target_folder": "Python rules refit/Documents/Citi/ComputerShares",
+    "target_folder_add_year": false
+  },
+  "Courcelles - Lance - Appel de fonds - Annexe": {
+    "keywords": [
+      "Lance",
+      "Courcelles",
+      "PROVISIONS",
+      "Annexe"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Paris, le (\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Courcelles - Appel sur budget - Annexe",
+    "filename_datetype": "quarter",
+    "month_shift": 1,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles #impots/Copropriete - Charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "Courcelles - Lance - Appel de fonds - Recap": {
+    "keywords": [
+      "Lance",
+      "Courcelles",
+      "PROVISIONS",
+      "En un coup"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Paris, le (\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Courcelles - Appel sur budget - Recap",
+    "filename_datetype": "quarter",
+    "month_shift": 1,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles #impots/Copropriete - Charges/Appels previsionnels",
+    "target_folder_add_year": true
+  },
+  "EDF - La Bergerie - Facture": {
+    "keywords": [
+      "EDF",
+      "Le montant total TTC de votre facture correspond",
+      "N° de compte : 4 02 4 038 979 224"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - La Bergerie - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - La Bergerie - Echancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 038 979 224"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - La Bergerie - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - La Bergerie - Compteur de chantier - Facture": {
+    "keywords": [
+      "EDF",
+      "Facture",
+      "N° de compte : 4 02 4 036 325 627"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - La Bergerie - Compteur de chantier - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - La Bergerie - Compteur de chantier - Echancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 036 325 627"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - La Bergerie - Compteur de chantier - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Mas Palmyre _ facture": {
+    "keywords": [
+      "EDF",
+      "Le montant total TTC de votre facture correspond",
+      "N° de compte : 4 02 4 028 664 849"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Mas Palmyre - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Eygalieres - Mas Palmyre/1. Revenus & Depenses - Eygalieres #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Mas Palmyre _ echeancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 028 664 849"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Mas Palmyre - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Eygalieres - Mas Palmyre/1. Revenus & Depenses - Eygalieres #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Courcelles _ facture": {
+    "keywords": [
+      "EDF",
+      "Le montant total TTC de votre facture correspond",
+      "N° de compte : 4 02 4 032 286 372"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Courcelles - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Courcelles _ facture 2": {
+    "keywords": [
+      "EDF",
+      "Facture rectificative",
+      "N° de compte : 4 02 4 032 286 372"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Courcelles - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Courcelles _ echeancier": {
+    "keywords": [
+      "EDF",
+      "nouveau calendrier de paiement",
+      "N° de compte : 4 02 4 032 286 372"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Courcelles - Echeancier",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Courcelles/1. Revenus & Depenses - SCI - Courcelles #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "EDF - Etables - Facture": {
+    "keywords": [
+      "EDF",
+      "Le montant total TTC de votre facture correspond",
+      "N° de compte : 4 02 4 014 584 425"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Facture du (\\d{2}\\/\\d{2}\\/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      },
+      {
+        "regex_string": "(\\d{8})_",
+        "extract_format": "%Y%m%d"
+      }
+    ],
+    "filename_base": "EDF - Etables - Facture",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Etables sur Mer/1. Revenus & Depenses - SCI - Etables #impots/EDF",
+    "target_folder_add_year": true
+  },
+  "France - Urssaf - Zaira": {
+    "keywords": [
+      "Urssaf",
+      "ZAIRA MORALINA",
+      "BULLETIN DE SALAIRE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "Zaira Moralina - Payslip",
+    "filename_datetype": "day",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/FR/Zaira/Fiches de paye",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - CPJ - Facture": {
+    "keywords": [
+      "C.P.J",
+      "entretien"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Date : (\\d{2}/\\d{2}/\\d{4})",
+        "extract_format": "%d/%m/%Y"
+      }
+    ],
+    "filename_base": "Mas Palmyre - Piscine",
+    "filename_datetype": "month",
+    "month_shift": -1,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Eygalieres - Mas Palmyre/1. Revenus & Depenses - Eygalieres #impots/Piscine",
+    "target_folder_add_year": false
+  },
+  "Eygalieres - Palmyre - Orange": {
+    "keywords": [
+      "orange",
+      "760562116"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "date de facture : (\\d{2}\\/\\d{2}\\/\\d{2})",
+        "extract_format": "%d/%m/%y"
+      }
+    ],
+    "filename_base": "Eygalieres - Orange",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/Orange",
+    "target_folder_add_year": false
+  },
+  "Eygalieres - La Bergerie - Taxe de Sejour": {
+    "keywords": [
+      "TAXE DE SEJOUR",
+      "La Bergerie",
+      "capitulatif",
+      "perception"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "perception du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "La Bergerie - Taxe de sejour",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux #impots/La Bergerie - Taxe de sejour",
+    "target_folder_add_year": false
+  }
+
+
+}

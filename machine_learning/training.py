@@ -85,8 +85,8 @@ class DriveModelTrainer:
             mime_type = item['mimeType']
             
             if mime_type == 'application/vnd.google-apps.folder':
-                if "old" in name.lower():
-                    logging.info(f"Skipping folder '{name}' (contains 'old')")
+                if "old" in name.lower() or "others" in name.lower():
+                    logging.info(f"Skipping folder '{name}'")
                     continue
                 
                 self.traverse_folder(item_id, current_path_parts + [name])

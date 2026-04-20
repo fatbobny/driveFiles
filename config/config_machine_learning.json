@@ -1,0 +1,6 @@
+{
+  "folder_models" : "machine_learning/models",
+  "rootRegression" : "linear_regression_",
+  "rootVectorizer" : "linear_reg_vectorizer_",
+  "extensionModels" : ".sav"
+}
