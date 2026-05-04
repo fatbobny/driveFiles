@@ -63,8 +63,8 @@ def delete_matches():
 
 
 FOLDERS_TO_DELETE = [
+    # Add folder paths here before running delete_by_folders(), e.g.:
     # "Documents/Health/Z. Old/Claims HK/Old",
-    # "Documents/Finances/LMNP/Z. Old/Mathurins",
 ]
 
 
@@ -113,4 +113,3 @@ def delete_by_folders(folders=None):
 
 if __name__ == '__main__':
     inspect()
-    # delete_by_folders()

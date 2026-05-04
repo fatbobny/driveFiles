@@ -4,7 +4,7 @@ import json
 import re
 from datetime import datetime
 import pyperclip
-import dateparser # Using dateparser for more robust date extraction
+import dateparser
 from googleDriveAPI import GoogleDriveFileManager
 from drive_file import DriveFile
 import pushover_seb
@@ -108,44 +108,69 @@ def create_interface(drive_manager, pdf_configs, files_in_folder, config_path, f
         config_name = config_dropdown.value
         with test_output_area:
             test_output_area.clear_output()
-            if not file_id or not config_name: print("Error: Please select both a file and a configuration."); return
+            if not file_id or not config_name:
+                print("Error: Please select both a file and a configuration.")
+                return
             print(f"Fetching details for file: {file_dropdown.label}...")
             file_details = drive_manager.get_file_details_and_extract_content(file_id)
             test_output_area.clear_output()
-            if file_details.get('error') or not file_details.get('extracted_text'): print(f"Error: Could not extract text. {file_details.get('error', '')}"); return
+            if file_details.get('error') or not file_details.get('extracted_text'):
+                print(f"Error: Could not extract text. {file_details.get('error', '')}")
+                return
             current_globals['current_file_details'] = file_details
             current_globals['current_file_label'] = file_dropdown.label
-            run_and_display_analysis(current_globals['current_file_details']['extracted_text'], current_globals['current_file_label'], config_name, pdf_configs)
+            run_and_display_analysis(current_globals['current_file_details']['extracted_text'],
+                                     current_globals['current_file_label'], config_name, pdf_configs)
 
     def on_reload_button_clicked(b):
         config_name = config_dropdown.value
         with test_output_area:
             test_output_area.clear_output()
-            if not current_globals.get('current_file_details'): print("Please run '3. Test Selected Config' first."); return
+            if not current_globals.get('current_file_details'):
+                print("Please run '3. Test Selected Config' first.")
+                return
             print(f"Reloading {config_path} and re-testing...")
             try:
-                with open(config_path, 'r') as f: reloaded_pdf_configs = json.load(f)
+                with open(config_path, 'r') as f:
+                    reloaded_pdf_configs = json.load(f)
                 config_dropdown.options = sorted(reloaded_pdf_configs.keys())
                 config_dropdown.value = config_name if config_name in reloaded_pdf_configs else None
                 test_output_area.clear_output()
-            except Exception as e: print(f"Error reloading config file: {e}"); return
-            run_and_display_analysis(current_globals['current_file_details']['extracted_text'], current_globals['current_file_label'], config_name, reloaded_pdf_configs, is_retest=True)
+            except Exception as e:
+                print(f"Error reloading config file: {e}")
+                return
+            run_and_display_analysis(current_globals['current_file_details']['extracted_text'],
+                                     current_globals['current_file_label'], config_name,
+                                     reloaded_pdf_configs, is_retest=True)
 
     def on_process_button_clicked(b):
         with test_output_area:
             test_output_area.clear_output()
-            if not current_globals.get('current_file_details'): print("Error: Please run '3. Test Selected Config' first."); return
+            if not current_globals.get('current_file_details'):
+                print("Error: Please run '3. Test Selected Config' first.")
+                return
             print(f"Processing file: {current_globals.get('current_file_label')}...")
             try:
-                with open(config_path, 'r') as f: latest_pdf_configs = json.load(f)
-                with open('config/pushover_config.json', 'r') as f: pushover_creds = json.load(f)
-                drive_file_instance = DriveFile(file_details=current_globals['current_file_details'], drive_manager=drive_manager, pdf_configs=latest_pdf_configs, ml_model=None, ml_vectorizer=None, pushover_creds=pushover_creds)
+                with open(config_path, 'r') as f:
+                    latest_pdf_configs = json.load(f)
+                with open('config/pushover_config.json', 'r') as f:
+                    pushover_creds = json.load(f)
+                drive_file_instance = DriveFile(
+                    file_details=current_globals['current_file_details'],
+                    drive_manager=drive_manager,
+                    pdf_configs=latest_pdf_configs,
+                    ml_model=None,
+                    ml_vectorizer=None,
+                    pushover_creds=pushover_creds
+                )
                 print("Calling rename_and_sort()...")
                 drive_file_instance.rename_and_sort()
                 print("\n--- Processing Complete ---")
                 display(HTML("<h4><font color='green'>✅ File processed successfully.</font> Check Google Drive.</h4>"))
-            except FileNotFoundError: print("\nError: Could not find 'config/pushover_seb.json'.")
-            except Exception as e: print(f"\nAn error occurred during processing: {e}")
+            except FileNotFoundError:
+                print("\nError: Could not find 'config/pushover_config.json'.")
+            except Exception as e:
+                print(f"\nAn error occurred during processing: {e}")
 
     refresh_files_button.on_click(on_refresh_files_button_clicked)
     test_button.on_click(on_test_button_clicked)
