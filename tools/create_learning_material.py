@@ -117,7 +117,7 @@ def extract_files(dm, new_files):
         print(f"\n{len(failed)} failed file(s) added to exclusion list.")
     return files_data
 
-def can wegenerate_learning_material(auto=False):
+def can_we_generate_learning_material(auto=False):
     dm = drive.GoogleDriveFileManager(
         credentials_path='config/google_credentials.json',
         token_path='config/google_token.json'
@@ -272,5 +272,3 @@ def init_exclusion_list():
 
 if __name__ == '__main__':
     generate_learning_material()
-    # init_exclusion_list()
-    # generate_learning_material()

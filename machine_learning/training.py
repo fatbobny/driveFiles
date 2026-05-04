@@ -76,7 +76,6 @@ class DriveModelTrainer:
         return files
 
     def traverse_folder(self, folder_id, current_path_parts):
-        # logging.info(f"Scanning folder: {'/'.join(current_path_parts)}")
         items = self.list_all_files_in_folder(folder_id)
         
         for item in items:
@@ -138,9 +137,6 @@ class DriveModelTrainer:
         for file_info in self.files_to_process:
             file_id = file_info['id']
             if file_id in self.cache:
-                # Check if content is valid (not empty string if we want to retry empty ones, but here we assume empty means no text found)
-                # If we want to retry failed extractions, we could check if content is empty.
-                # For now, assume cache is authoritative.
                 continue
             
             logging.info(f"Extracting content for {file_info['name']} ({count + 1} new files)")
@@ -204,7 +200,6 @@ class DriveModelTrainer:
         y_pred = model.predict(X_test)
         report = classification_report(y_test, y_pred)
         logging.info("Classification Report:\n" + report)
-        print("Classification Report:\n" + report)
         
         # Save
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

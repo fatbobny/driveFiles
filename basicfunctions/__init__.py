@@ -6,91 +6,95 @@ import calendar
 import datetime
 import pickle
 import os
-import sklearn #pip install scikit-learn
+
 
 def extract_json_content(json_file_path):
     """
-    Extracts and returns the content of a JSON file.
+    Loads and returns the content of a JSON file.
 
     Args:
-        json_file_path (str): The path to the JSON file.
+        json_file_path (str): Path to the JSON file.
 
     Returns:
-        dict or list: The content of the JSON file as a Python dictionary or list,
-                     or None if an error occurred.
+        dict or list: Parsed JSON content, or None on error.
     """
     try:
         with open(json_file_path, "r") as f:
-            config_data = json.load(f)
-            return config_data
+            return json.load(f)
     except FileNotFoundError:
-        print(f"Error: Configuration file not found at {json_file_path}")
-        logging.error(f"Error: Configuration file not found at {json_file_path}")
+        logging.error(f"Configuration file not found: {json_file_path}")
         return None
     except json.JSONDecodeError:
-        print(f"Error: Invalid JSON format in {json_file_path}")
-        logging.error(f"Error: Invalid JSON format in {json_file_path}")
+        logging.error(f"Invalid JSON format in {json_file_path}")
         return None
     except Exception as e:
-        print(f"An unexpected error occurred while loading the JSON file: {e}")
-        logging.error(f"An unexpected error occurred while loading the JSON file: {e}")
+        logging.error(f"Unexpected error loading JSON file: {e}")
         return None
+
 
 def countdown(t):
     """Displays a dynamic countdown timer in the terminal."""
     while t:
         mins, secs = divmod(t, 60)
-        timer = '{:02d}:{:02d}'.format(mins, secs)
-        # Use carriage return (\r) to overwrite the previous line
-        sys.stdout.write(f"\rTime remaining before refresh: {timer}")
-        sys.stdout.flush()  # Ensure the output is immediately displayed
+        sys.stdout.write(f"\rTime remaining before refresh: {mins:02d}:{secs:02d}")
+        sys.stdout.flush()
         time.sleep(1)
         t -= 1
 
-    # # Get current date and time in European format
-    # now = datetime.datetime.now()
-    # european_time = now.strftime("%d/%m/%Y %H:%M:%S")
-
-    # print(f"\rRefreshing: {european_time}   ")
-    # print(f"\r   ")
 
 def add_months(source_date, months):
     """
-    Adds a specified number of months to a given date, handling month and year rollovers
-    and ensuring the day remains valid for the new month.
+    Adds a number of months to a date, handling month/year rollovers and day clamping.
 
     Args:
         source_date (datetime.date): The original date.
-        months (int): The number of months to add (can be positive or negative).
+        months (int): Number of months to add (positive or negative).
 
     Returns:
-        datetime.date: The new date after adding the months.
+        datetime.date: The resulting date.
     """
-    # add months to a date
     month = source_date.month - 1 + months
     year = source_date.year + month // 12
     month = month % 12 + 1
     day = min(source_date.day, calendar.monthrange(year, month)[1])
     return datetime.date(year, month, day)
 
-def get_latest_file_in_folder(folder, root, extension):
-    # get all the files in the folder
-    list_all_files = [i for i in os.listdir(os.path.join(folder)) if root in i]
-    list_dates = [i[len(root):-4] for i in list_all_files]
-    latest_file = root + max(list_dates) + extension
-    print(f'latest {root} file in {folder} : {latest_file}')
-    return latest_file
 
-def load_ML_config(folder_models , rootRegression, rootVectorizer,extensionModels):
+def get_latest_file_in_folder(folder, filename_prefix, extension):
+    """
+    Returns the filename of the most recent file in a folder that starts with filename_prefix.
 
-    # Machine learning tagging
-    # folder_models = './Models'  # folder containing Models and names of the root files
-    # rootRegression = 'linear_regression_'
-    # rootVectorizer = 'linear_reg_vectorizer_'
-    # extensionModels = '.sav'
-    model = pickle.load(
-        open(folder_models + '/' + get_latest_file_in_folder(folder_models, rootRegression, extensionModels), 'rb'))
-    vectorizer = pickle.load(
-        open(folder_models + '/' + get_latest_file_in_folder(folder_models, rootVectorizer, extensionModels), 'rb'))
+    Args:
+        folder (str): Directory to search.
+        filename_prefix (str): Filename prefix to match (e.g. 'logistic_classifier_').
+        extension (str): File extension (e.g. '.sav').
 
+    Returns:
+        str: The latest matching filename (not full path).
+    """
+    matching = [f for f in os.listdir(folder) if filename_prefix in f]
+    dates = [f[len(filename_prefix):-len(extension)] for f in matching]
+    return filename_prefix + max(dates) + extension
+
+
+def load_ML_config(folder_models, rootRegression, rootVectorizer, extensionModels):
+    """
+    Loads the latest ML model and vectorizer from disk.
+
+    Args:
+        folder_models (str): Directory containing .sav model files.
+        rootRegression (str): Filename prefix for the classifier model.
+        rootVectorizer (str): Filename prefix for the vectorizer.
+        extensionModels (str): File extension (e.g. '.sav').
+        # pip install scikit-learn
+
+    Returns:
+        tuple: (model, vectorizer)
+    """
+    model = pickle.load(open(
+        os.path.join(folder_models, get_latest_file_in_folder(folder_models, rootRegression, extensionModels)), 'rb'
+    ))
+    vectorizer = pickle.load(open(
+        os.path.join(folder_models, get_latest_file_in_folder(folder_models, rootVectorizer, extensionModels)), 'rb'
+    ))
     return model, vectorizer

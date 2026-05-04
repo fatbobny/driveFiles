@@ -1,6 +1,7 @@
 import json
 import os
 
+# One-off script: update file_path to point to the correct dataset file before running.
 file_path = 'learning_data/file_sorting_dataset copy.json'
 
 with open(file_path, 'r', encoding='utf-8') as f:
