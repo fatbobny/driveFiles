@@ -12,11 +12,12 @@ A Google Drive file automation system that monitors specified folders, extracts 
 # Start the monitoring loop (runs indefinitely, checks every 30 seconds)
 python main.py
 
-# Train ML classification models from existing Drive folder structure
-cd machine_learning && python training.py
-
-# Generate training data from existing Drive folders
+# ML pipeline — two steps:
+# Step 1: Scan Drive, extract text, build learning_data/file_sorting_dataset.json
 python create_learning_material.py
+
+# Step 2: Train TF-IDF + LogisticRegression models from the dataset
+cd machine_learning && python training.py
 ```
 
 There are no automated tests. The project uses a `.venv` virtual environment.
@@ -30,8 +31,10 @@ There are no automated tests. The project uses a `.venv` virtual environment.
 - **`main.py`** — Entry point. Initializes Drive connection + ML models, defines `process_new_file()` callback, runs the monitoring loop.
 - **`drive_file.py`** — `DriveFile` class. Given extracted text and file metadata, determines the target filename (date-based) and folder path (config rule → ML fallback), then executes the rename/move.
 - **`googleDriveAPI/__init__.py`** — `GoogleDriveFileManager` class (~680 lines). All Drive API interactions: listing, downloading, renaming, moving, folder creation with path cache, OCR extraction, and the monitoring loop logic. Uses exponential backoff for rate limits.
-- **`machine_learning/training.py`** — `DriveModelTrainer`. Recursively extracts text from Drive files, trains `TfidfVectorizer + LogisticRegression`, saves `.sav` models.
+- **`machine_learning/training.py`** — `DriveModelTrainer`. Reads `learning_data/file_sorting_dataset.json`, trains `TfidfVectorizer + LogisticRegression`, saves paired `.sav` model files.
+- **`create_learning_material.py`** — Two functions: `generate_learning_material()` scans Drive recursively, extracts text, and appends to `learning_data/file_sorting_dataset.json` (incremental, skips already-extracted IDs); `init_exclusion_list()` bulk-adds unextractable files to `learning_data/excluded_files.json`. Files with `"2026"` in the name are never excluded (reserved for future extraction).
 - **`basicfunctions/__init__.py`** — Utilities: JSON loading, ML model loading (finds latest `.sav` file), date arithmetic.
+- **`pushover_seb/__init__.py`** — Thin wrapper around `pushover_complete.PushoverAPI`; exposes `pushover_send(msg_title, msg, api_token, user_key)`.
 
 ### Classification logic in `DriveFile`
 
@@ -74,4 +77,8 @@ The main processing flow uses the OCR method by default.
 
 ## ML model training
 
-Models are stored in `machine_learning/models/` as paired `.sav` files (vectorizer + classifier). `basicfunctions.load_ML_config()` automatically finds the latest file matching the configured prefix. Training scans the live Drive folder structure — the folder path becomes the label for each file's extracted text.
+Models are stored in `machine_learning/models/` as paired `.sav` files (vectorizer + classifier). `basicfunctions.load_ML_config()` automatically finds the latest file matching the configured prefix. The Drive folder path of each source file becomes its classification label. Training data lives in `learning_data/` (gitignored).
+
+## Inactive / archived code
+
+`z_previous_projects_files/` contains code from earlier project versions and is not used by the current system.
