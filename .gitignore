@@ -5,6 +5,7 @@ config/google_credentials.json
 config/google_token.json
 config/pushover_config.json
 config/config_pdf.json
+config/backup/
 
 # Ignore virtual environment (recommended)
 .venv/
