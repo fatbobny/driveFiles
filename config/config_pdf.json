@@ -1054,13 +1054,227 @@
     "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/Etables - Eau",
     "target_folder_add_year": true
   },
+  "Bank - Citi NY - Manon LLC": {
+    "keywords": [
+      "Statement period",
+      "Relationship Summary",
+      "MANON TIANO LLC",
+      "6879893838"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "( \\w{3} \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": -1,
+    "filename_base": "Citi US - Manon Tiano LLC",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Joint account": {
+    "keywords": [
+      "CITIBANK",
+      "Statement",
+      "6876619884"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "\\w* \\d{1,2} - (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Joint account",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Personal account": {
+    "keywords": [
+      "Statement period",
+      "6878823280"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "( \\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Personal account",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Credit card": {
+    "keywords": [
+      "AADVANTAGE",
+      "Citi",
+      "STATEMENT"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Billing Period.*\\d{1,2}\\/\\d{1,2}\\/\\d{1,2}-(\\d{1,2}\\/\\d{1,2}\\/\\d{1,2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Credit card AA",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Bank - Citi NY - Investment": {
+    "keywords": [
+      "citi Investment",
+      "State",
+      "C63-045121"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "- (\\w* \\d{2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi US - Investments",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Citi NY",
+    "target_folder_add_year": true
+  },
+  "Eygalieres - La Bergerie - Taxe de Sejour": {
+    "keywords": [
+      "TAXE DE SEJOUR",
+      "La Bergerie",
+      "capitulatif",
+      "perception"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "perception du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "La Bergerie - Taxe de sejour",
+    "filename_datetype": "month",
+    "month_shift": 0,
+    "target_folder": "Documents/Finances/SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux/La Bergerie - Taxe de sejour",
+    "target_folder_add_year": false
+  },
+  "France - Urssaf - Zaira": {
+    "keywords": [
+      "Urssaf",
+      "ZAIRA MORALINA",
+      "BULLETIN DE SALAIRE"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
+      }
+    ],
+    "filename_base": "Zaira Moralina - Payslip",
+    "filename_datetype": "day",
+    "month_shift": 0,
+    "target_folder": "/Documents/France/Zaira/Fiches de paye",
+    "target_folder_add_year": true
+  },
+  "Schwab - 527 - Trade confirmation": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "3368-7527",
+      "cusip"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Trade: (\\d{2}\\/\\d{2}\\/\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 527 - Trade confirmation",
+    "filename_datetype": "day",
+    "target_folder": "Documents/Finances/Banking - statements/Charles Schwab",
+    "target_folder_add_year": true
+  },
+  "Schwab - 527 - Statement": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "3368-7527",
+      "Account Value Summary",
+      "statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 527 - Statement",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Charles Schwab",
+    "target_folder_add_year": true
+  },
+  "Schwab - 221 - Statement": {
+    "keywords": [
+      "Schwab",
+      "Trade confirmation",
+      "6034-4221",
+      "Account Value Summary",
+      "statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - 221 - Statement",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Charles Schwab",
+    "target_folder_add_year": true
+  },
+  "Schwab - Futures": {
+    "keywords": [
+      "Schwab",
+      "Monthly Futures Statement"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "This Month's Activity.*(\\d{4}-\\d{2}-\\d{2})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Schwab - Futures",
+    "filename_datetype": "month",
+    "target_folder": "Documents/Finances/Banking - statements/Charles Schwab",
+    "target_folder_add_year": true
+  },
 
-
-
-
-
-
-
+  "Bank - Citi HK - Cards": {
+    "keywords": [
+      "Citibank",
+      "Citi Credit Cards and/or Ready Credit"
+    ],
+    "type": "standard",
+    "regex_date": [
+      {
+        "regex_string": "(\\w* \\d{1,2}, \\d{4})"
+      }
+    ],
+    "month_shift": 0,
+    "filename_base": "Citi - Cards",
+    "filename_datetype": "month",
+    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi HK",
+    "target_folder_add_year": true
+  },
   "Bank - BNP - Assurances vie - CR de gestion": {
     "keywords": [
       "BNP PARIBAS",
@@ -1097,7 +1311,6 @@
     "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/BNP France",
     "target_folder_add_year": true
   },
-
   "Bank - BNP - Assurances vie - arbitrage": {
     "keywords": [
       "BNP PARIBAS",
@@ -1151,191 +1364,7 @@
     "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/HSBC HK",
     "target_folder_add_year": true
   },
-  "Bank - Citi HK - Cards": {
-    "keywords": [
-      "Citibank",
-      "Citi Credit Cards and/or Ready Credit"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "(\\w* \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Citi - Cards",
-    "filename_datetype": "month",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi HK",
-    "target_folder_add_year": true
-  },
-  "Bank - Citi NY - Manon LLC": {
-    "keywords": [
-      "Statement period",
-      "Relationship Summary",
-      "MANON TIANO LLC",
-      "6879893838"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "( \\w{3} \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": -1,
-    "filename_base": "Citi US - Manon Tiano LLC",
-    "filename_datetype": "day",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
-    "target_folder_add_year": true
-  },
-  "Bank - Citi NY - Joint account": {
-    "keywords": [
-      "CITIGOLD SERVICES",
-      "Your Citigold simplified banking Account Statement",
-      "6876619884"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "\\w* \\d{1,2} - (\\w* \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Citi US - Joint account",
-    "filename_datetype": "day",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
-    "target_folder_add_year": true
-  },
-  "Bank - Citi NY - Personal account": {
-    "keywords": [
-      "Global Executive Banking",
-      "Statement period",
-      "Relationship Summary",
-      "6878823280"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "( \\w{3} \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": -1,
-    "filename_base": "Citi US - Personal account",
-    "filename_datetype": "day",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
-    "target_folder_add_year": true
-  },
-  "Bank - Citi NY - Credit card": {
-    "keywords": [
-      "AADVANTAGE",
-      "Citi",
-      "STATEMENT"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "Billing Period.*(\\d{1,2}\\/\\d{1,2}\\/\\d{1,2})"
-      }
-    ],
-    "month_shift": -1,
-    "filename_base": "Citi US - Credit card AA",
-    "filename_datetype": "day",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
-    "target_folder_add_year": true
-  },
-  "Bank - Citi NY - Investment": {
-    "keywords": [
-      "citi Investment",
-      "State",
-      "C63-045121"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "- (\\w* \\d{2}, \\d{4})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Citi US - Investments",
-    "filename_datetype": "month",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Citi NY",
-    "target_folder_add_year": true
-  },
-  "Schwab - 527 - Trade confirmation": {
-    "keywords": [
-      "Schwab",
-      "Trade confirmation",
-      "3368-7527",
-      "cusip"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "Trade: (\\d{2}\\/\\d{2}\\/\\d{2})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Schwab - 527 - Trade confirmation",
-    "filename_datetype": "day",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Trade confirmations",
-    "target_folder_add_year": true
-  },
-  "Schwab - 527 - Statement": {
-    "keywords": [
-      "Schwab",
-      "Trade confirmation",
-      "3368-7527",
-      "Account Value Summary",
-      "statement"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Schwab - 527 - Statement",
-    "filename_datetype": "month",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
-    "target_folder_add_year": true
-  },
-  "Schwab - 221 - Statement": {
-    "keywords": [
-      "Schwab",
-      "Trade confirmation",
-      "6034-4221",
-      "Account Value Summary",
-      "statement"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "Statement Period: \\w* \\d{1,2}, \\d{4} to (\\w* \\d{1,2}, \\d{4})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Schwab - 221 - Statement",
-    "filename_datetype": "month",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
-    "target_folder_add_year": true
-  },
-  "Schwab - Futures": {
-    "keywords": [
-      "Schwab",
-      "Monthly Futures Statement"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "This Month's Activity.*(\\d{4}-\\d{2}-\\d{2})"
-      }
-    ],
-    "month_shift": 0,
-    "filename_base": "Schwab - Futures",
-    "filename_datetype": "month",
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/2. Releves bancaires/Charles Schwab/Statements",
-    "target_folder_add_year": true
-  },
+
   "Eygalieres - Couleurs Piscines - Facture": {
     "keywords": [
       "Couleurs Piscines",
@@ -1642,24 +1671,7 @@
     "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Mailleux Tiano/1. Proprietes/Etables sur Mer/1. Revenus & Depenses - SCI - Etables #impots/EDF",
     "target_folder_add_year": true
   },
-  "France - Urssaf - Zaira": {
-    "keywords": [
-      "Urssaf",
-      "ZAIRA MORALINA",
-      "BULLETIN DE SALAIRE"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
-      }
-    ],
-    "filename_base": "Zaira Moralina - Payslip",
-    "filename_datetype": "day",
-    "month_shift": 0,
-    "target_folder": "Python rules refit/Documents/FR/Zaira/Fiches de paye",
-    "target_folder_add_year": true
-  },
+
   "Eygalieres - CPJ - Facture": {
     "keywords": [
       "C.P.J",
@@ -1694,25 +1706,6 @@
     "filename_datetype": "month",
     "month_shift": 0,
     "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SCI Chalou/1. Proprietes/Eygalieres - La Bergerie/1. Revenus & Depenses - La Bergerie #impots/Orange",
-    "target_folder_add_year": false
-  },
-  "Eygalieres - La Bergerie - Taxe de Sejour": {
-    "keywords": [
-      "TAXE DE SEJOUR",
-      "La Bergerie",
-      "capitulatif",
-      "perception"
-    ],
-    "type": "standard",
-    "regex_date": [
-      {
-        "regex_string": "perception du \\d{2}\\/\\d{2}\\/\\d{4} au (\\d{2}\\/\\d{2}\\/\\d{4})"
-      }
-    ],
-    "filename_base": "La Bergerie - Taxe de sejour",
-    "filename_datetype": "month",
-    "month_shift": 0,
-    "target_folder": "Python rules refit/Documents/Patrimoine & Finances/3. SARL Tiano Mailleux/1. Revenus & Depenses - SARL Tiano Mailleux #impots/La Bergerie - Taxe de sejour",
     "target_folder_add_year": false
   }
 

@@ -16,6 +16,9 @@ secrets/
 # example to ignore all files in the output folder, if you have one.
 output/
 
+# Learning data (large files, local only)
+learning_data/
+
 # Large binary/data files
 *.pkl
 *.sav

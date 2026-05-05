@@ -24,21 +24,20 @@ def _should_skip_folder(name, current_path=""):
     return any(full_path == ignored or full_path.startswith(ignored + os.sep) for ignored in IGNORED_FOLDER_PATHS)
 
 def list_new_files(dm, folder_id, current_path="Documents", filter_mime_types=None,
-                   existing_ids=None):
+                   existing_keys=None):
     """
     Recursively scans Drive folders and returns metadata for new files (no extraction).
     """
     if filter_mime_types is None:
         filter_mime_types = ['application/pdf', 'image/']
-    if existing_ids is None:
-        existing_ids = set()
+    if existing_keys is None:
+        existing_keys = set()
 
     print(f"  Scanning: {current_path}")
     found = []
     items = dm.list_files_in_folder(folder_id)
 
     for item in items:
-        item_id = item['id']
         item_name = item['name']
         mime_type = item['mimeType']
 
@@ -47,12 +46,12 @@ def list_new_files(dm, folder_id, current_path="Documents", filter_mime_types=No
                 print(f"  Skipping: {os.path.join(current_path, item_name)}")
                 continue
             subfolder_path = os.path.join(current_path, item_name)
-            found.extend(list_new_files(dm, item_id, subfolder_path, filter_mime_types, existing_ids))
+            found.extend(list_new_files(dm, item['id'], subfolder_path, filter_mime_types, existing_keys))
         else:
             if any(filter_type in mime_type for filter_type in filter_mime_types):
-                if item_id not in existing_ids:
+                if (item_name, current_path) not in existing_keys:
                     print(f"    + {item_name}")
-                    found.append({'id': item_id, 'name': item_name, 'path': current_path, 'mimeType': mime_type})
+                    found.append({'id': item['id'], 'name': item_name, 'path': current_path, 'mimeType': mime_type})
                 else:
                     print(f"    ~ {item_name} (already extracted)")
 
@@ -61,12 +60,12 @@ def list_new_files(dm, folder_id, current_path="Documents", filter_mime_types=No
 EXCLUDED_FILES_PATH = os.path.join('learning_data', 'excluded_files.json')
 
 
-def load_excluded_ids():
+def load_excluded_keys():
     if not os.path.exists(EXCLUDED_FILES_PATH):
         return set()
     with open(EXCLUDED_FILES_PATH, 'r', encoding='utf-8') as f:
         entries = json.load(f)
-    return {e['file_id'] for e in entries}
+    return {(e['file_name'], e['target_path']) for e in entries}
 
 
 def save_excluded_files(new_failures):
@@ -74,8 +73,8 @@ def save_excluded_files(new_failures):
     if os.path.exists(EXCLUDED_FILES_PATH):
         with open(EXCLUDED_FILES_PATH, 'r', encoding='utf-8') as f:
             existing = json.load(f)
-    existing_ids = {e['file_id'] for e in existing}
-    to_add = [e for e in new_failures if e['file_id'] not in existing_ids]
+    existing_keys = {(e['file_name'], e['target_path']) for e in existing}
+    to_add = [e for e in new_failures if (e['file_name'], e['target_path']) not in existing_keys]
     if to_add:
         updated = existing + to_add
         with open(EXCLUDED_FILES_PATH, 'w', encoding='utf-8') as f:
@@ -107,7 +106,6 @@ def extract_files(dm, new_files):
             print("FAILED (no text extracted)")
             if '2026' not in item['name']:
                 failed.append({
-                    'file_id': item['id'],
                     'file_name': item['name'],
                     'target_path': item['path'],
                     'mime_type': item['mimeType']
@@ -117,7 +115,21 @@ def extract_files(dm, new_files):
         print(f"\n{len(failed)} failed file(s) added to exclusion list.")
     return files_data
 
-def can_we_generate_learning_material(auto=False):
+def _clean_excluded_files(drive_keys):
+    """Remove entries from excluded_files.json that no longer exist on Drive."""
+    if not os.path.exists(EXCLUDED_FILES_PATH):
+        return 0
+    with open(EXCLUDED_FILES_PATH, 'r', encoding='utf-8') as f:
+        existing = json.load(f)
+    kept = [e for e in existing if (e['file_name'], e['target_path']) in drive_keys]
+    removed = len(existing) - len(kept)
+    if removed:
+        with open(EXCLUDED_FILES_PATH, 'w', encoding='utf-8') as f:
+            json.dump(kept, f, indent=4, ensure_ascii=False)
+    return removed
+
+
+def generate_learning_material(auto=False):
     dm = drive.GoogleDriveFileManager(
         credentials_path='config/google_credentials.json',
         token_path='config/google_token.json'
@@ -133,60 +145,86 @@ def can_we_generate_learning_material(auto=False):
     output_dir = 'learning_data'
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, 'file_sorting_dataset.json')
+    reference_file = '/Users/sebastienmailleux/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Claude Cowork/File Sorting/file_sorting_dataset.json'
 
-    # Load existing dataset to enable incremental updates
+    # Load existing dataset from the reference file (source of truth)
     existing_data = []
-    existing_ids = set()
-    if os.path.exists(output_file):
-        with open(output_file, 'r', encoding='utf-8') as f:
+    source_file = reference_file if os.path.exists(reference_file) else output_file
+    if os.path.exists(source_file):
+        with open(source_file, 'r', encoding='utf-8') as f:
             existing_data = json.load(f)
-        existing_ids = {entry['file_id'] for entry in existing_data if 'file_id' in entry}
-        logging.info(f"Loaded {len(existing_data)} existing entries, will skip {len(existing_ids)} already-extracted files.")
-        print(f"Loaded {len(existing_data)} existing entries, will skip {len(existing_ids)} already-extracted files.")
+        print(f"Loaded {len(existing_data)} existing entries from '{source_file}'.")
 
-    excluded_ids = load_excluded_ids()
-    logging.info(f"Exclusion list: {len(excluded_ids)} file(s) will be skipped.")
-    print(f"Exclusion list: {len(excluded_ids)} file(s) will be skipped.")
-    existing_ids |= excluded_ids
+    # Scan ALL Drive files first (no exclusions) to build the ground truth
+    print(f"\nFound '{target_folder_name}' folder (ID: {documents_folder_id}). Scanning all files on Drive...")
+    all_drive_files = list_new_files(dm, documents_folder_id, current_path="Documents", existing_keys=set())
+    drive_keys = {(f['name'], f['path']) for f in all_drive_files}
 
-    logging.info(f"Found '{target_folder_name}' folder (ID: {documents_folder_id}). Scanning for new files...")
-    print(f"Found '{target_folder_name}' folder (ID: {documents_folder_id}). Scanning for new files...")
-    new_files = list_new_files(dm, documents_folder_id, current_path="Documents", existing_ids=existing_ids)
+    # --- Step 1: Identify stale entries ---
+    stale = [e for e in existing_data if (e['file_name'], e['target_path']) not in drive_keys]
+    clean_data = [e for e in existing_data if (e['file_name'], e['target_path']) in drive_keys]
 
-    if not new_files:
-        logging.info("No new files found. Dataset is up to date.")
-        print("No new files found. Dataset is up to date.")
+    # Count stale exclusions (removal deferred until after confirmation)
+    stale_excluded_count = 0
+    if os.path.exists(EXCLUDED_FILES_PATH):
+        with open(EXCLUDED_FILES_PATH, 'r', encoding='utf-8') as f:
+            excluded_entries = json.load(f)
+        stale_excluded_count = sum(1 for e in excluded_entries if (e['file_name'], e['target_path']) not in drive_keys)
+
+    if stale:
+        print(f"\n{len(stale)} stale dataset entry(ies) to remove (file no longer on Drive):")
+        for e in stale:
+            print(f"  - {e['target_path']}/{e['file_name']}")
+    if stale_excluded_count:
+        print(f"{stale_excluded_count} stale exclusion entry(ies) to remove.")
+
+    # --- Step 2: Find new files ---
+    excluded_keys = load_excluded_keys()
+    dataset_keys = {(e['file_name'], e['target_path']) for e in clean_data}
+    skip_keys = dataset_keys | excluded_keys
+    new_files = [f for f in all_drive_files if (f['name'], f['path']) not in skip_keys]
+
+    if new_files:
+        print(f"\n{len(new_files)} new file(s) to extract:")
+        for f in new_files:
+            print(f"  + {f['path']}/{f['name']}")
+
+    if not stale and not stale_excluded_count and not new_files:
+        print("\nDataset is up to date. Nothing to do.")
         return
 
-    print(f"\n{len(new_files)} new file(s) to extract:\n")
-    for f in new_files:
-        print(f"  {f['path']}/{f['name']}")
     print()
-
     if not auto:
-        answer = input("Proceed with extraction? [y/N] ").strip().lower()
+        answer = input("Proceed? [y/N] ").strip().lower()
         if answer != 'y':
-            logging.info("Extraction cancelled by user.")
+            logging.info("Cancelled by user.")
             return
 
-    # Backup only when actually about to write
+    # Apply deferred exclusion cleanup now that user confirmed
+    excluded_removed = _clean_excluded_files(drive_keys)
+
+    # Backup before any write
     if os.path.exists(output_file):
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_file = os.path.join(output_dir, f"file_sorting_dataset_{timestamp}.json")
         shutil.copy2(output_file, backup_file)
         logging.info(f"Backup created at '{backup_file}'")
 
-    new_data = extract_files(dm, new_files)
-    learning_data = existing_data + new_data
+    new_data = extract_files(dm, new_files) if new_files else []
+    learning_data = clean_data + new_data
 
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(learning_data, f, indent=4, ensure_ascii=False)
 
-    copy_dest = '/Users/sebastienmailleux/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Claude Cowork/File Sorting/file_sorting_dataset.json'
-    shutil.copy2(output_file, copy_dest)
-    print(f"Dataset copied to '{copy_dest}'")
+    shutil.copy2(output_file, reference_file)
+    print(f"Dataset copied to '{reference_file}'")
 
-    msg = f"Added {len(new_data)} new entries. Dataset now has {len(learning_data)} total examples."
+    parts = []
+    if stale:
+        parts.append(f"removed {len(stale)} stale entry(ies)")
+    if new_data:
+        parts.append(f"added {len(new_data)} new entry(ies)")
+    msg = f"{'; '.join(parts).capitalize()}. Dataset now has {len(learning_data)} total examples."
     logging.info(msg)
     print(msg)
 
@@ -220,32 +258,32 @@ def init_exclusion_list():
     output_dir = 'learning_data'
     output_file = os.path.join(output_dir, 'file_sorting_dataset.json')
 
-    # Load IDs already successfully extracted
-    extracted_ids = set()
+    # Load keys already successfully extracted
+    extracted_keys = set()
     if os.path.exists(output_file):
         with open(output_file, 'r', encoding='utf-8') as f:
             existing_data = json.load(f)
-        extracted_ids = {e['file_id'] for e in existing_data if 'file_id' in e}
-        logging.info(f"Dataset has {len(extracted_ids)} successfully extracted files.")
+        extracted_keys = {(e['file_name'], e['target_path']) for e in existing_data}
+        logging.info(f"Dataset has {len(extracted_keys)} successfully extracted files.")
 
-    already_excluded_ids = load_excluded_ids()
+    already_excluded_keys = load_excluded_keys()
 
     # Scan all files (no exclusions so we see everything)
     logging.info("Scanning Drive for all files...")
-    all_files = list_new_files(dm, documents_folder_id, current_path="Documents", existing_ids=set())
+    all_files = list_new_files(dm, documents_folder_id, current_path="Documents", existing_keys=set())
 
     missing = [
         f for f in all_files
-        if f['id'] not in extracted_ids
-        and f['id'] not in already_excluded_ids
+        if (f['name'], f['path']) not in extracted_keys
+        and (f['name'], f['path']) not in already_excluded_keys
         and '2026' not in f['name']
     ]
 
-    skipped_recent = [f for f in all_files if f['id'] not in extracted_ids and '2026' in f['name']]
+    skipped_recent = [f for f in all_files if (f['name'], f['path']) not in extracted_keys and '2026' in f['name']]
 
     print(f"\nTotal files found on Drive:      {len(all_files)}")
-    print(f"Already extracted:               {len(extracted_ids)}")
-    print(f"Already excluded:                {len(already_excluded_ids)}")
+    print(f"Already extracted:               {len(extracted_keys)}")
+    print(f"Already excluded:                {len(already_excluded_keys)}")
     print(f"Skipped (2026 in name):          {len(skipped_recent)}")
     print(f"New files to exclude:            {len(missing)}")
 
@@ -263,7 +301,7 @@ def init_exclusion_list():
         return
 
     to_exclude = [
-        {'file_id': f['id'], 'file_name': f['name'], 'target_path': f['path'], 'mime_type': f['mimeType']}
+        {'file_name': f['name'], 'target_path': f['path'], 'mime_type': f['mimeType']}
         for f in missing
     ]
     save_excluded_files(to_exclude)
