@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (pythonProject)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (pythonProject)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 virtualenv at ~/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Python/2025_file_management/pythonProject/.venv" project-jdk-type="Python SDK" />
   <component name="PyPackaging">
     <option name="earlyReleasesAsUpgrades" value="true" />
   </component>

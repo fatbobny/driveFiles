@@ -1,7 +1,9 @@
 #!/bin/bash
 PROJECT_DIR="/Users/sebastienmailleux/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Python/2025_file_management/pythonProject"
+PYTHON="$PROJECT_DIR/.venv/bin/python"
 cd "$PROJECT_DIR"
-".venv/.venv/bin/python" -c "
+export PYTHONPATH="$PROJECT_DIR:$PROJECT_DIR/tools"
+"$PYTHON" -c "
 from create_learning_material import generate_learning_material
 generate_learning_material(auto=True)
 "

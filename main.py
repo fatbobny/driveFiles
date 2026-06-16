@@ -9,7 +9,7 @@ from drive_file import DriveFile
 POLL_INTERVAL_SECONDS = 30
 
 logging.basicConfig(
-    level=logging.INFO,
+    level=logging.WARNING,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler("app.log"),

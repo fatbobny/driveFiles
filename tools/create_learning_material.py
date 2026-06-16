@@ -191,6 +191,13 @@ def generate_learning_material(auto=False):
 
     if not stale and not stale_excluded_count and not new_files:
         print("\nDataset is up to date. Nothing to do.")
+        creds = extract_json_content('config/pushover_config.json')
+        pushover.pushover_send(
+            msg_title="Learning data updated",
+            msg="Dataset is up to date. Nothing to do.",
+            api_token=creds['API'],
+            user_key=creds['user']
+        )
         return
 
     print()
@@ -309,4 +316,4 @@ def init_exclusion_list():
 
 
 if __name__ == '__main__':
-    generate_learning_material()
+    generate_learning_material(auto=True)
