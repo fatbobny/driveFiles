@@ -216,7 +216,7 @@ class GoogleDriveFileManager:
             while True:
                 results = (
                     self.drive_service.files()
-                    .list(q=q, fields="nextPageToken, files(id, name, mimeType)", pageToken=page_token)
+                    .list(q=q, fields="nextPageToken, files(id, name, mimeType, createdTime)", pageToken=page_token)
                     .execute()
                 )
                 all_items.extend(results.get("files", []))

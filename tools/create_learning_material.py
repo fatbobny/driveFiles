@@ -2,7 +2,7 @@ import os
 import json
 import logging
 import shutil
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import googleDriveAPI as drive
 import pushover_seb as pushover
 from basicfunctions import extract_json_content
@@ -51,7 +51,7 @@ def list_new_files(dm, folder_id, current_path="Documents", filter_mime_types=No
             if any(filter_type in mime_type for filter_type in filter_mime_types):
                 if (item_name, current_path) not in existing_keys:
                     print(f"    + {item_name}")
-                    found.append({'id': item['id'], 'name': item_name, 'path': current_path, 'mimeType': mime_type})
+                    found.append({'id': item['id'], 'name': item_name, 'path': current_path, 'mimeType': mime_type, 'createdTime': item.get('createdTime')})
                 else:
                     print(f"    ~ {item_name} (already extracted)")
 
@@ -183,6 +183,19 @@ def generate_learning_material(auto=False):
     dataset_keys = {(e['file_name'], e['target_path']) for e in clean_data}
     skip_keys = dataset_keys | excluded_keys
     new_files = [f for f in all_drive_files if (f['name'], f['path']) not in skip_keys]
+
+    one_month_ago = datetime.now(timezone.utc) - timedelta(days=30)
+    recent_files = []
+    skipped_old = []
+    for f in new_files:
+        created = f.get('createdTime')
+        if created and datetime.fromisoformat(created.replace('Z', '+00:00')) >= one_month_ago:
+            recent_files.append(f)
+        else:
+            skipped_old.append(f)
+    if skipped_old:
+        print(f"\n{len(skipped_old)} new file(s) skipped (created more than 30 days ago).")
+    new_files = recent_files
 
     if new_files:
         print(f"\n{len(new_files)} new file(s) to extract:")
