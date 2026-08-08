@@ -145,13 +145,15 @@ def generate_learning_material(auto=False):
     output_dir = 'learning_data'
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, 'file_sorting_dataset.json')
+    reference_file = '/Users/seb/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Claude Cowork/File Sorting/file_sorting_dataset.json'
 
-    # Load existing dataset
+    # Load existing dataset from the reference file (source of truth)
     existing_data = []
-    if os.path.exists(output_file):
-        with open(output_file, 'r', encoding='utf-8') as f:
+    source_file = reference_file if os.path.exists(reference_file) else output_file
+    if os.path.exists(source_file):
+        with open(source_file, 'r', encoding='utf-8') as f:
             existing_data = json.load(f)
-        print(f"Loaded {len(existing_data)} existing entries from '{output_file}'.")
+        print(f"Loaded {len(existing_data)} existing entries from '{source_file}'.")
 
     # Scan ALL Drive files first (no exclusions) to build the ground truth
     print(f"\nFound '{target_folder_name}' folder (ID: {documents_folder_id}). Scanning all files on Drive...")
