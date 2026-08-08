@@ -443,7 +443,8 @@ class GoogleDriveFileManager:
                 try:
                     pages = convert_from_path(temp_pdf.name, dpi=self._ocr_dpi, last_page=max_pages_for_ocr)
                 except Exception as e:
-                    logging.error(f"Error converting PDF to images: {e}. Ensure poppler is installed.")
+                    error_summary = next((line for line in str(e).splitlines() if line.strip()), str(e))
+                    logging.error(f"Error converting PDF to images: {error_summary}. Ensure poppler is installed.")
                     return None
 
             logging.info(f'Extracting text: scanning up to {max_pages_for_ocr} pages')

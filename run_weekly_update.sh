@@ -1,6 +1,7 @@
 #!/bin/bash
-PROJECT_DIR="/Users/sebastienmailleux/Library/CloudStorage/GoogleDrive-sebastien.mailleux@gmail.com/My Drive/Python/2025_file_management/pythonProject"
-PYTHON="$PROJECT_DIR/.venv/bin/python"
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PYTHON="/opt/homebrew/bin/python3.12"
+export PATH="/opt/homebrew/bin:$PATH"
 cd "$PROJECT_DIR"
 export PYTHONPATH="$PROJECT_DIR:$PROJECT_DIR/tools"
 "$PYTHON" -c "
