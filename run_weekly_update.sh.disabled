@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# DISABLED 2026-08-08 — superseded by ~/Developer/drive-dataset-sync
+# (launchd agent com.seb.drive-dataset-sync, Mondays 09:00).
+#
+# Do not run this. It writes the same file_sorting_dataset.json as the new
+# project, but with the old stale-removal logic: a rate-limited folder listing
+# returns [] instead of raising, so every dataset entry beneath it is deleted
+# as "missing from Drive". It also matches the root folder by name alone,
+# which picks up 5 nested folders named "Documents" and falsely marks entries
+# stale, and it compares keys without NFC normalization, so accented French
+# filenames never match.
+#
+# To sync the dataset:  cd ~/Developer/drive-dataset-sync && python -m syncds run
+#
+PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PYTHON="/opt/homebrew/bin/python3.12"
+export PATH="/opt/homebrew/bin:$PATH"
+cd "$PROJECT_DIR"
+export PYTHONPATH="$PROJECT_DIR:$PROJECT_DIR/tools"
+"$PYTHON" -c "
+from create_learning_material import generate_learning_material
+generate_learning_material(auto=True)
+"
